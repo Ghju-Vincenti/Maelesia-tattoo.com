@@ -3045,8 +3045,9 @@ td:last-child {
  * ------------------------------------------------------------------- */
 .s-header {
     --header-height : 110px;
-    --logo-width    : 10.2rem;
-    --width-grid-max: calc(var(--width-sixteen-cols) - calc(var(--gutter) * 2));
+    --logo-width    : 12.2rem;
+    --width-grid-max: var(--width-default);
+    /* --width-grid-max: calc(var(--width-sixteen-cols) - calc(var(--gutter) * 2)); */
     --box-shadow    : 0 1px 1px rgba(0, 0, 0, 0.02),
                       0 2px 2px rgba(0, 0, 0, 0.02),
                       0 4px 4px rgba(0, 0, 0, 0.02),
@@ -3164,9 +3165,9 @@ td:last-child {
 
 .s-header__menu-links a {
     display            : block;
-    font-family        : var(--font-1);
+    font-family        : var(--font-2);
     font-weight        : 400;
-    font-size          : 1.5rem;
+    font-size          : 2.5rem;
     line-height        : var(--vspace-1);
     color              : var(--color-gray-14);
     padding            : 0 1.2rem;
