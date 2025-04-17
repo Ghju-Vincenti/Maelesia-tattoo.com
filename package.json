@@ -3,5 +3,8 @@
     "@sanity/client": "^6.29.0",
     "next-sanity": "^9.10.2",
     "sanity": "^3.84.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.1"
   }
 }

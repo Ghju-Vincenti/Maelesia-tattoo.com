@@ -38,7 +38,7 @@
             <div class="row s-header__inner">
                 <div class="s-header__block">
                     <div class="s-header__logo">
-                        <a class="logo" href="#">
+                        <a class="logo" href="../index.html">
                             <img src="../images/logo.svg" alt="Logo">
                         </a>
                     </div>
@@ -52,30 +52,17 @@
             </div>
         </header>
 
-        <!-- Main Blank Section -->
-        <section class="s-blank-section target-section">
-            <div class="row">
-                <div class="column xl-12">
-                    <!-- Your content goes here -->
-                </div>
-            </div>
-        </section>
-
         <section id="about" class="s-about target-section">
             <div class="row s-about__content">
                 <div class="column xl-12">
                     <div class="s-about__flex-container">
-
-                        <div id="tattoos-container">
+                        <div id="tattoos-container"> Tattoos
                             <!-- Tattoos will be loaded here -->
                         </div>
-                        <script type="module" src="../pages/real.js"></script>
-
-                        </div> <!-- end s-about__text -->
-                    </div> <!-- end s-about__flex-container -->
-                </div> <!-- end column -->
-            </div> <!-- end s-about__content -->
-        </section> <!-- end s-about -->
+                    </div>
+                </div> 
+            </div> 
+        </section>
 
         <!-- Footer -->
         <footer class="s-footer target-section">
@@ -91,6 +78,9 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@sanity/client@3.5.0/dist/sanityClient.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@sanity/image-url@1.0.1/dist/image-url.min.js"></script>
+    <script type="module" src="./real.js"></script>
     <script src="../js/plugins.js"></script>
     <script src="../js/main.js"></script>
 
