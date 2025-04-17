@@ -62,6 +62,9 @@
  *      ## copyright
  *      ## go top
  *
+ * ------------------------------------------------------------------ /
+ * # TATTOO CARD MAELESIA
+ *
  * ------------------------------------------------------------------ */
 
 
@@ -3413,7 +3416,7 @@ td:last-child {
 
 .s-intro__content-text {
     z-index    : 2;
-    grid-column: 1/span 8;
+    grid-column: 2;
     margin-top : var(--vspace-1);
 }
 
@@ -3741,12 +3744,12 @@ td:last-child {
 .no-js .s-intro__scroll-down,
 .ss-show .s-intro__social,
 .ss-show .s-intro__scroll-down {
-    transition-delay: 1.2s;
+    transition-delay: 0.6s;
 }
 
 .no-js .s-header__inner,
 .ss-show .s-header__inner {
-    transition-delay: 1.5s;
+    transition-delay: 0.8s;
 }
 
 /* ------------------------------------------------------------------- 
@@ -4340,6 +4343,27 @@ td:last-child {
     color: white;
 }
 
+/* ===================================================================
+ * # TATTOO CARD MAELESIA
+ *
+ *
+ * ------------------------------------------------------------------- */
+
+ .tattoo-card {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .tattoo-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }  
+
+
+ 
 /* ------------------------------------------------------------------- 
  * ## copyright
  * ------------------------------------------------------------------- */

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blank Themed Page</title>
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/vendor.css">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+</head>
+
+<body id="top">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+
+    <!-- Page Wrapper -->
+    <div id="page" class="s-pagewrap">
+
+        <!-- Header -->
+        <header class="s-header">
+            <div class="row s-header__inner">
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="#">
+                            <img src="../images/logo.svg" alt="Logo">
+                        </a>
+                    </div>
+                    <a class="s-header__menu-toggle" href="index.html"><span>Menu</span></a>
+                </div>
+                <nav class="s-header__nav">
+                    <ul class="s-header__menu-links">
+                        <li class="current"><a href="index.html">Home</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Blank Section -->
+        <section class="s-blank-section target-section">
+            <div class="row">
+                <div class="column xl-12">
+                    <!-- Your content goes here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="s-about target-section">
+            <div class="row s-about__content">
+                <div class="column xl-12">
+                    <div class="s-about__flex-container">
+
+                        <div id="tattoos-container">
+                            <!-- Tattoos will be loaded here -->
+                        </div>
+                        <script type="module" src="../pages/real.js"></script>
+
+                        </div> <!-- end s-about__text -->
+                    </div> <!-- end s-about__flex-container -->
+                </div> <!-- end column -->
+            </div> <!-- end s-about__content -->
+        </section> <!-- end s-about -->
+
+        <!-- Footer -->
+        <footer class="s-footer target-section">
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Blank Page Theme</span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../js/plugins.js"></script>
+    <script src="../js/main.js"></script>
+
+</body>
+</html>
