@@ -13,6 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../css/vendor.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/real.css">
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -56,9 +57,37 @@
             <div class="row s-about__content">
                 <div class="column xl-12">
                     <div class="s-about__flex-container">
-                        <div id="tattoos-container"> Tattoos
-                            <!-- Tattoos will be loaded here -->
+                        
+                        <div class="filters">
+                            <select id="styleFilter">
+                                <option value="">Tous les styles</option>
+                            </select>
+                            
+                            <select id="dateFilter">
+                                <option value="newest">Plus récents</option>
+                                <option value="oldest">Plus anciens</option>
+                            </select>
                         </div>
+                                                    
+                            <main>
+                                <div class="tattoo-grid" id="tattoos-container"></div>
+                            </main>
+
+                            <!-- Modale -->
+                            <div class="modal" id="modal">
+                                <div class="modal-content">
+                                <span class="close" id="closeModal">&times;</span>
+                                <img id="modal-img" />
+                                <h2 id="modal-title"></h2>
+                                <p id="modal-description"></p>
+                                <small id="modal-style"></small>
+                                <br />
+                                <small id="modal-date"></small>
+                                </div>
+                            </div>
+                          
+                          <script src="/pages/real.js" type="module"></script>
+                          
                     </div>
                 </div> 
             </div> 
