@@ -1,99 +1,114 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('tattoos-container')
-  const styleFilter = document.getElementById('styleFilter')
-  const dateFilter = document.getElementById('dateFilter')
+  const container   = document.getElementById('tattoos-container');
+  const styleFilter = document.getElementById('styleFilter');
+  const tagFilter   = document.getElementById('tagFilter');
+  const dateFilter  = document.getElementById('dateFilter');
+  const modal       = document.getElementById('modal');
+  const modalImg    = document.getElementById('modal-img');
+  const modalTitle  = document.getElementById('modal-title');
+  const modalDesc   = document.getElementById('modal-description');
+  const modalStyle  = document.getElementById('modal-style');
+  const modalDate   = document.getElementById('modal-date');
+  const closeModal  = document.getElementById('closeModal');
+  const prevBtn     = document.getElementById('prevBtn');
+  const nextBtn     = document.getElementById('nextBtn');
 
-  const modal = document.getElementById('modal')
-  const modalImg = document.getElementById('modal-img')
-  const modalTitle = document.getElementById('modal-title')
-  const modalDescription = document.getElementById('modal-description')
-  const modalStyle = document.getElementById('modal-style')
-  const modalDate = document.getElementById('modal-date')
-  const closeModal = document.getElementById('closeModal')
-
-  if (!container || !styleFilter || !dateFilter || !modal) {
-    console.error('Un ou plusieurs éléments manquent dans le HTML')
-    return
+  if (!container || !styleFilter || !tagFilter || !dateFilter || !modal) {
+    console.error('Éléments manquants');
+    return;
   }
 
-  let allTattoos = []
-
-  const projectId = 'omiqn05p'
-  const query = encodeURIComponent('*[_type == "tattoo"]')
-  const url = `https://${projectId}.api.sanity.io/v2021-06-07/data/query/production?query=${query}`
+  let allTattoos    = [];
+  let currentImages = [];
+  let currentIndex  = 0;
+  const projectId   = 'omiqn05p';
+  const query       = encodeURIComponent('*[_type == "tattoo"]');
+  const url         = `https://${projectId}.api.sanity.io/v2021-06-07/data/query/production?query=${query}`;
 
   fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      allTattoos = data.result
-      populateStyleFilter(allTattoos)
-      renderTattoos()
+    .then(r => r.json())
+    .then(d => {
+      allTattoos = d.result.map(t => ({
+        ...t,
+        tags: t.tags || []  // on attend un champ `tags: []` dans Sanity
+      }));
+      populateFilter(styleFilter, allTattoos.flatMap(t => t.style ? [t.style] : []));
+      populateFilter(tagFilter,   allTattoos.flatMap(t => t.tags));
+      renderTattoos();
     })
-    .catch(err => console.error('Erreur lors de la récupération:', err))
+    .catch(e => console.error(e));
+
+  function populateFilter(selectEl, items) {
+    const uniques = [...new Set(items.filter(Boolean))].sort();
+    uniques.forEach(val => {
+      const opt = document.createElement('option');
+      opt.value = val;
+      opt.textContent = val;
+      selectEl.appendChild(opt);
+    });
+  }
 
   function renderTattoos() {
-    const selectedStyle = styleFilter.value
-    const selectedDate = dateFilter.value
+    const s = styleFilter.value;
+    const t = tagFilter.value;
+    const d = dateFilter.value;
+    let list = [...allTattoos];
 
-    let tattoos = [...allTattoos]
+    if (s) list = list.filter(x => x.style === s);
+    if (t) list = list.filter(x => x.tags.includes(t));
+    list.sort((a,b) => {
+      const da = new Date(a._createdAt), db = new Date(b._createdAt);
+      return d === 'oldest' ? da - db : db - da;
+    });
 
-    if (selectedStyle) {
-      tattoos = tattoos.filter(t => t.style === selectedStyle)
-    }
+    container.innerHTML = '';
+    list.forEach(tat => {
+      const imgObj = Array.isArray(tat.images) && tat.images.length
+        ? tat.images[0] : tat.image;
+      if (!imgObj?.asset?._ref) return;
+      const [,id,dims,fmt] = imgObj.asset._ref.split('-');
+      const src = `https://cdn.sanity.io/images/${projectId}/production/${id}-${dims}.${fmt}`;
 
-    tattoos.sort((a, b) => {
-      const dateA = new Date(a._createdAt)
-      const dateB = new Date(b._createdAt)
-      return selectedDate === 'oldest' ? dateA - dateB : dateB - dateA
-    })
-
-    container.innerHTML = ''
-
-    tattoos.forEach(tattoo => {
-      const ref = tattoo.image?.asset?._ref
-      if (!ref) return
-
-      const [, imageId, dimensions, format] = ref.split('-')
-      const imageUrl = `https://cdn.sanity.io/images/${projectId}/production/${imageId}-${dimensions}.${format}`
-
-      const img = document.createElement('img')
-      img.src = imageUrl
-      img.alt = tattoo.title
-      img.classList.add('tattoo-img')
-
-      img.addEventListener('click', () => {
-        modalImg.src = imageUrl
-        modalTitle.textContent = tattoo.title
-        modalDescription.textContent = tattoo.description || 'Aucune description'
-        modalStyle.textContent = tattoo.style ? `Style : ${tattoo.style}` : ''
-        modalDate.textContent = `Créé le : ${new Date(tattoo._createdAt).toLocaleDateString('fr-FR')}`
-        modal.style.display = 'flex'
-      })
-
-      container.appendChild(img)
-    })
+      const card = document.createElement('div');
+      card.className = 'tattoo-card';
+      card.innerHTML = `<img src="${src}" alt="${tat.title}">`;
+      card.addEventListener('click', () => openModal(tat));
+      container.appendChild(card);
+    });
   }
 
-  function populateStyleFilter(tattoos) {
-    const styles = [...new Set(tattoos.map(t => t.style).filter(Boolean))]
-    styles.forEach(style => {
-      const option = document.createElement('option')
-      option.value = style
-      option.textContent = style
-      styleFilter.appendChild(option)
-    })
+  function openModal(tat) {
+    currentImages = Array.isArray(tat.images) && tat.images.length
+      ? tat.images : tat.image ? [tat.image] : [];
+    currentIndex = 0;
+    updateModal(tat);
+    modal.style.display = 'flex';
   }
 
-  closeModal.addEventListener('click', () => {
-    modal.style.display = 'none'
-  })
+  function updateModal(tat) {
+    if (!currentImages.length) return;
+    const imgRef = currentImages[currentIndex].asset._ref.split('-');
+    const src    = `https://cdn.sanity.io/images/${projectId}/production/${imgRef[1]}-${imgRef[2]}.${imgRef[3]}`;
+    modalImg.src        = src;
+    modalTitle.textContent  = tat.title;
+    modalDesc.textContent   = tat.description || '';
+    modalStyle.textContent  = tat.style  ? `Style : ${tat.style}` : '';
+    modalDate.textContent   = `Créé le : ${new Date(tat._createdAt).toLocaleDateString('fr-FR')}`;
+  }
 
-  window.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.style.display = 'none'
-    }
-  })
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateModal(allTattoos.find(x => x._id === allTattoos.find(t => t.images?.some(i => i.asset._ref === currentImages[currentIndex].asset._ref))._id));
+  });
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateModal(allTattoos.find(x => x._id === allTattoos.find(t => t.images?.some(i => i.asset._ref === currentImages[currentIndex].asset._ref))._id));
+  });
 
-  styleFilter.addEventListener('change', renderTattoos)
-  dateFilter.addEventListener('change', renderTattoos)
-})
+  closeModal.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', e => { if (e.target===modal) modal.style.display='none'; });
+
+  styleFilter.addEventListener('change', renderTattoos);
+  tagFilter.addEventListener('change',   renderTattoos);
+  dateFilter.addEventListener('change',  renderTattoos);
+});

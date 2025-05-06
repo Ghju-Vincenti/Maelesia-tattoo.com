@@ -4343,25 +4343,6 @@ td:last-child {
     color: white;
 }
 
-/* ===================================================================
- * # TATTOO CARD MAELESIA
- *
- *
- * ------------------------------------------------------------------- */
-
- .tattoo-card {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .tattoo-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }  
-
 
  
 /* ------------------------------------------------------------------- 

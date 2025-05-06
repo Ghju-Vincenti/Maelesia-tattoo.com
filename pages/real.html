@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blank Themed Page</title>
+    <title>Mes réalisations</title>
 
     <script>
         document.documentElement.classList.remove('no-js');
@@ -53,38 +53,53 @@
             </div>
         </header>
 
-        <section id="about" class="s-about target-section">
+        <section id="real" class="target-section">
+
+            <div class="imageheroreal">
+                <div class="column xl-12">
+                    <h3 class="realheader">Mes réalisations</h3>
+                    <h5 class="realheadersub">Découvrez mes dernières créations.</h5>
+                </div>
+            </div>
+
+
+            <div id="filters">
+                <select id="styleFilter">
+                  <option value="">Tous les styles</option>
+                </select>
+              
+                <select id="tagFilter">
+                  <option value="">Tous les tags</option>
+                </select>
+              
+                <select id="dateFilter">
+                  <option value="newest">Plus récents</option>
+                  <option value="oldest">Plus anciens</option>
+                </select>
+              </div>
+              
             <div class="row s-about__content">
                 <div class="column xl-12">
                     <div class="s-about__flex-container">
-                        
-                        <div class="filters">
-                            <select id="styleFilter">
-                                <option value="">Tous les styles</option>
-                            </select>
-                            
-                            <select id="dateFilter">
-                                <option value="newest">Plus récents</option>
-                                <option value="oldest">Plus anciens</option>
-                            </select>
-                        </div>
-                                                    
                             <main>
                                 <div class="tattoo-grid" id="tattoos-container"></div>
                             </main>
 
-                            <!-- Modale -->
+                            <!-- Modale d'informations -->
                             <div class="modal" id="modal">
                                 <div class="modal-content">
                                 <span class="close" id="closeModal">&times;</span>
+                                <button class="nav prev" id="prevBtn">&#10094;</button>
                                 <img id="modal-img" />
+                                <button class="nav next" id="nextBtn">&#10095;</button>
                                 <h2 id="modal-title"></h2>
                                 <p id="modal-description"></p>
-                                <small id="modal-style"></small>
-                                <br />
+                                <small id="modal-style"></small><br/>
                                 <small id="modal-date"></small>
                                 </div>
                             </div>
+  
+  
                           
                           <script src="/pages/real.js" type="module"></script>
                           
