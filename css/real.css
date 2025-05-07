@@ -33,13 +33,14 @@
   background: #fafafa;
   cursor: pointer;
 }
-/* ========== Grille principale ========== */
-#tattoos-container {
+
+/* ========= Grille responsive ========= */
+.tattoo-grid, #tattoos-container { 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  /* auto‑fill remplit autant de colonnes qu’il tient, chacune min 250px */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;   /* espace entre les cartes */
   padding: 20px;
-  padding-bottom: 15rem;
 }
 
 /* ========== Carte (une image seule) ========== */
@@ -226,3 +227,6 @@
 .tag-dropdown.open .tag-dropdown-menu {
   display: flex;  /* ou block, selon ton design */
 }
+
+
+
