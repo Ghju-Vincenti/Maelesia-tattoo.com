@@ -1,132 +1,139 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mes réalisations</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mes réalisations</title>
 
-    <script>
-        document.documentElement.classList.remove('no-js');
-        document.documentElement.classList.add('js');
-    </script>
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../css/vendor.css">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/real.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/vendor.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/real.css">
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
 </head>
 
 <body id="top">
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="loader" class="dots-fade">
-            <div></div><div></div><div></div>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="loader" class="dots-fade">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+
+  <!-- Page Wrapper -->
+  <div id="page" class="s-pagewrap">
+
+    <!-- Header -->
+    <header class="s-header">
+      <div class="row s-header__inner">
+        <div class="s-header__block">
+          <div class="s-header__logo">
+            <a class="logo" href="../index.html">
+              <img src="../images/logo.svg" alt="Logo">
+            </a>
+          </div>
+          <a class="s-header__menu-toggle" href="index.html"><span>Menu</span></a>
         </div>
-    </div>
+        <nav class="s-header__nav">
+          <ul class="s-header__menu-links">
+            <li class="current"><a href="index.html">Home</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <!-- Page Wrapper -->
-    <div id="page" class="s-pagewrap">
+    <section id="real" class="target-section">
 
-        <!-- Header -->
-        <header class="s-header">
-            <div class="row s-header__inner">
-                <div class="s-header__block">
-                    <div class="s-header__logo">
-                        <a class="logo" href="../index.html">
-                            <img src="../images/logo.svg" alt="Logo">
-                        </a>
-                    </div>
-                    <a class="s-header__menu-toggle" href="index.html"><span>Menu</span></a>
-                </div>
-                <nav class="s-header__nav">
-                    <ul class="s-header__menu-links">
-                        <li class="current"><a href="index.html">Home</a></li>
-                    </ul>
-                </nav>
+      <div class="imageheroreal">
+        <div class="column xl-12">
+          <h3 class="realheader">Mes réalisations</h3>
+          <h5 class="realheadersub">Découvrez mes dernières créations.</h5>
+        </div>
+      </div>
+
+      <!-- Barre de filtres -->
+      <div id="filters">
+        <!-- Style filter -->
+        <select id="styleFilter">
+          <option value="">Tous les styles</option>
+        </select>
+
+        <!-- Dropdown searchable tags -->
+        <div class="tag-dropdown" id="tagDropdown">
+          <button type="button" id="tagDropdownButton">
+            Tags <span class="arrow">▾</span>
+          </button>
+          <div class="tag-dropdown-menu" id="tagDropdownMenu">
+            <input type="text" id="tagSearch" placeholder="Rechercher un tag…" />
+            <div class="tag-list" id="tagList">
+              <!-- List of checkboxes populated by JS -->
             </div>
-        </header>
+          </div>
+        </div>
 
-        <section id="real" class="target-section">
+        <!-- Date filter -->
+        <select id="dateFilter">
+          <option value="newest">Plus récents</option>
+          <option value="oldest">Plus anciens</option>
+        </select>
+      </div>
 
-            <div class="imageheroreal">
-                <div class="column xl-12">
-                    <h3 class="realheader">Mes réalisations</h3>
-                    <h5 class="realheadersub">Découvrez mes dernières créations.</h5>
-                </div>
-            </div>
+      <div class="row s-about__content">
+        <div class="column xl-12">
+          <div class="s-about__flex-container">
+            <main>
+              <div class="tattoo-grid" id="tattoos-container"></div>
+            </main>
 
-
-            <div id="filters">
-                <select id="styleFilter">
-                  <option value="">Tous les styles</option>
-                </select>
-              
-                <select id="tagFilter">
-                  <option value="">Tous les tags</option>
-                </select>
-              
-                <select id="dateFilter">
-                  <option value="newest">Plus récents</option>
-                  <option value="oldest">Plus anciens</option>
-                </select>
+            <!-- Modale d'informations -->
+            <div class="modal" id="modal">
+              <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <button class="nav prev" id="prevBtn">&#10094;</button>
+                <img id="modal-img" alt="Aperçu agrandi"/>
+                <button class="nav next" id="nextBtn">&#10095;</button>
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+                <small id="modal-style"></small><br/>
+                <small id="modal-date"></small>
               </div>
-              
-            <div class="row s-about__content">
-                <div class="column xl-12">
-                    <div class="s-about__flex-container">
-                            <main>
-                                <div class="tattoo-grid" id="tattoos-container"></div>
-                            </main>
-
-                            <!-- Modale d'informations -->
-                            <div class="modal" id="modal">
-                                <div class="modal-content">
-                                <span class="close" id="closeModal">&times;</span>
-                                <button class="nav prev" id="prevBtn">&#10094;</button>
-                                <img id="modal-img" />
-                                <button class="nav next" id="nextBtn">&#10095;</button>
-                                <h2 id="modal-title"></h2>
-                                <p id="modal-description"></p>
-                                <small id="modal-style"></small><br/>
-                                <small id="modal-date"></small>
-                                </div>
-                            </div>
-  
-  
-                          
-                          <script src="/pages/real.js" type="module"></script>
-                          
-                    </div>
-                </div> 
-            </div> 
-        </section>
-
-        <!-- Footer -->
-        <footer class="s-footer target-section">
-            <div class="row s-footer__bottom">
-                <div class="column xl-6 lg-12">
-                    <p class="ss-copyright">
-                        <span>© Blank Page Theme</span>
-                    </p>
-                </div>
             </div>
-        </footer>
 
-    </div>
+            <!-- Scripts -->
+            <script type="module" src="./real.js"></script>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/@sanity/client@3.5.0/dist/sanityClient.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@sanity/image-url@1.0.1/dist/image-url.min.js"></script>
-    <script type="module" src="./real.js"></script>
-    <script src="../js/plugins.js"></script>
-    <script src="../js/main.js"></script>
+    <!-- Footer -->
+    <footer class="s-footer target-section">
+      <div class="row s-footer__bottom">
+        <div class="column xl-6 lg-12">
+          <p class="ss-copyright">
+            <span>© Blank Page Theme</span>
+          </p>
+        </div>
+      </div>
+    </footer>
 
+  </div>
+
+  <!-- JavaScript vendor & main -->
+  <script src="https://cdn.jsdelivr.net/npm/@sanity/client@3.5.0/dist/sanityClient.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@sanity/image-url@1.0.1/dist/image-url.min.js"></script>
+  <script src="../js/plugins.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>
