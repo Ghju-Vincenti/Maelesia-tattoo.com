@@ -157,16 +157,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
 
-  // Update modal content
-  function updateModal(tat) {
-    if (!currentImages.length) return;
-    const [_, imgId, dims, fmt] = currentImages[currentIndex].asset._ref.split('-');
-    modalImg.src       = `https://cdn.sanity.io/images/${projectId}/production/${imgId}-${dims}.${fmt}`;
-    modalTitle.textContent = tat.title;
-    modalDesc.textContent  = tat.description || '';
-    modalStyle.textContent = tat.style ? `Style : ${tat.style}` : '';
-    modalDate.textContent  = `Créé le : ${new Date(tat._createdAt).toLocaleDateString('fr-FR')}`;
+// Update modal content
+function updateModal(tat) {
+  if (!currentImages.length) return;
+
+  // Image
+  const [_, imgId, dims, fmt] = currentImages[currentIndex].asset._ref.split('-');
+  modalImg.src = `https://cdn.sanity.io/images/${projectId}/production/${imgId}-${dims}.${fmt}`;
+
+  // Textual info
+  modalTitle.textContent = tat.title;
+  modalDesc.textContent  = tat.description || '';
+  modalStyle.textContent = tat.style   ? `Style : ${tat.style}`   : '';
+  modalDate.textContent  = `Créé le : ${new Date(tat._createdAt).toLocaleDateString('fr-FR')}`;
+
+  // --- NEW: Render tags ---
+  const modalTags = document.getElementById('modal-tags');
+  modalTags.innerHTML = '';  // clear previous tags
+  if (tat.tags && tat.tags.length) {
+    tat.tags.forEach(tag => {
+      const span = document.createElement('span');
+      span.className   = 'tag';
+      span.textContent = tag;
+      modalTags.appendChild(span);
+    });
   }
+}
+
 
   // Carousel navigation
   prevBtn.addEventListener('click', () => {

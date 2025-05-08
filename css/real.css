@@ -71,6 +71,9 @@
 }
 
 /* ========== Modale ========== */
+/* Add or update in your real.css */
+
+/* Modal overlay already covers full screen */
 .modal {
   display: none;
   position: fixed;
@@ -80,24 +83,39 @@
   align-items: center;
   padding: 20px;
   z-index: 1000;
+  overflow: auto;            /* allow scrolling of the overlay if needed */
 }
+
+/* Constrain the inner content and make it scrollable */
 .modal-content {
   position: relative;
   background: #fff;
   border-radius: 10px;
+  width: 90%;
   max-width: 600px;
-  width: 100%;
+  max-height: 80vh;          /* limit to 80% of viewport height */
   padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;          /* allow vertical scroll inside */
   text-align: center;
-  overflow: hidden;
 }
+
+/* Optional: style the scrollbar (WebKit only) */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.3);
+  border-radius: 4px;
+}
+
 .modal-content img {
   width: 100%;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 16px;
 }
-.modal-content h2 { margin-bottom: 8px; font-size: 1.5rem; }
+.modal-content h2 { margin-bottom: 20px; font-size: 4rem;   margin-top: 20px;}
 .modal-content p  { margin-bottom: 12px; color: #555; }
 .modal-content small { display: block; margin-top: 4px; color: #777; }
 
@@ -250,16 +268,6 @@
   .tag-dropdown {
     width: 100%;
   }
-  .tag-dropdown-menu {
-    position: fixed;
-    justify-self: anchor-center;
-    left: 0;
-    right: 0;
-    top: 420px;               /* sous le header si nécessaire */
-    width: 80%;
-    max-height: calc(100vh - 80px);
-    border-radius: 0;
-  }
   #tagSearch {
     padding: 10px;
     margin-bottom: 10px;
@@ -276,4 +284,61 @@
     padding: 10px;
     font-size: 1.1rem;
   }
+
+  .tag-dropdown-menu {
+    display: none;               /* hidden by default */
+    position: absolute;          /* position relative to .tag-dropdown */
+    top: 100%;                   /* directly below the button */
+    left: 0;
+    right: 0;                    /* stretch to the same width as parent */
+    width: auto;                 /* or set a fixed width if you prefer */
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 100;                /* sit above the grid */
+    max-height: 12rem;           /* show approx. 4 tags before scrolling */
+    overflow-y: auto;            /* enable scroll when too tall */
+  }
+  
+  /* Show when open */
+  .tag-dropdown.open .tag-dropdown-menu {
+    display: flex;
+    max-height: 14rem; 
+    flex-direction: column;
+    overflow-y: auto;       /* enable vertical scrolling */
+    
+  }
+
+    /* inside your existing @media (max-width: 480px) block (or globally) */
+  .tag-dropdown-menu .tag-list {
+    /* roughly 4 items high: 
+      if each label is ~2 rem tall + padding, adjust to your exact line-height/padding */
+    max-height: 14rem;       /* e.g. 4 × 2rem */
+    overflow-y: auto;       /* enable vertical scrolling */
+  }
+
+  /* always show the scrollbar on mobile for discoverability (optional) */
+  .tag-dropdown-menu .tag-list::-webkit-scrollbar {
+    width: 4px;
+  }
+  .tag-dropdown-menu .tag-list::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 2px;
+  }
+
+  }
+  
+.tag {
+  display: inline-block;
+  background: #e0e0e0;
+  color: #333;
+  font-size: 1.5rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin: 2px 10px 2px 0;
+}
+.tag-container {
+  margin-top: 8px;
 }
