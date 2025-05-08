@@ -315,7 +315,7 @@
   .tag-dropdown-menu .tag-list {
     /* roughly 4 items high: 
       if each label is ~2 rem tall + padding, adjust to your exact line-height/padding */
-    max-height: 14rem;       /* e.g. 4 × 2rem */
+    max-height: 16rem;       /* e.g. 4 × 2rem */
     overflow-y: auto;       /* enable vertical scrolling */
   }
 
