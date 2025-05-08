@@ -143,8 +143,19 @@ document.addEventListener('DOMContentLoaded', () => {
         : [];
     currentIndex = 0;
     updateModal(tat);
+  
+    // Cacher les flèches si une seule image
+    if (currentImages.length < 2) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+    } else {
+      prevBtn.style.display = '';
+      nextBtn.style.display = '';
+    }
+  
     modal.style.display = 'flex';
   }
+  
 
   // Update modal content
   function updateModal(tat) {

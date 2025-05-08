@@ -3531,6 +3531,11 @@ td:last-child {
     }
 }
 
+@media screen and (max-width: 1080px) {
+    .grid-block.grid-16 {
+        --col: 6;
+    }
+}
 
 /* --------------------------------------------------------------------
  * ## intro btn cv download
@@ -3796,10 +3801,11 @@ td:last-child {
     .s-intro__content {
         padding-bottom: var(--vspace-0_75);
         align-items   : center;
+        background-color: rgba(0, 0, 0, 0.671);
+        
     }
 
     .s-intro__content-text {
-        grid-column: 1/-1;
         text-align : center;
         max-width  : 70vw;
         margin     : 0 auto;
