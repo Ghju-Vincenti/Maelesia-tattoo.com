@@ -1,6 +1,7 @@
+import preview from './preview'
 import tattoo from './tattoo'
 
 export const schemaTypes = [
-    tattoo,
+    tattoo,preview
 
 ]

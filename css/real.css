@@ -152,7 +152,7 @@
 @media (max-width: 600px) {
   .tattoo-card img       { height: 200px; }
   .modal-content        { padding: 16px; }
-  .modal-content img     { max-height: 300px; }
+  .modal-content img   { height: auto; }
 }
 
 /* ========== Dropdown Tags ========== */
